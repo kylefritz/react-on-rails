@@ -24,6 +24,7 @@ converter = new Showdown.converter()
     author = @refs.author.getDOMNode().value.trim()
     text = @refs.text.getDOMNode().value.trim()
 
+    @props.onCommentSubmit({author, text})
     @refs.author.getDOMNode().value = ''
     @refs.text.getDOMNode().value = ''
 
@@ -44,7 +45,8 @@ converter = new Showdown.converter()
     data: []
   componentDidMount: ->
     @loadComments()
-    setInterval(@loadComments, @props.pollInterval)
+    if @props.pollInterval?
+      setInterval(@loadComments, @props.pollInterval)
   loadComments: ->
     $.ajax
       url: @props.url
@@ -52,7 +54,17 @@ converter = new Showdown.converter()
       success: (data) => @setState({data})
       error: (xhr, status, err) =>
         console.error(@props.url, status, err.toString())
-  handleCommentSubmit: ->
+  handleCommentSubmit: (comment) ->
+    #optimistically update
+    @setState(data: @state.data.concat([comment]))
+    $.ajax
+      url: @props.url
+      type: 'POST'
+      data: comment
+      dataType: 'json'
+      success: (data) => @setState({data})
+      error: (xhr, status, err) =>
+        console.error(@props.url, status, err.toString())
 
   render: ->
     <div className="commentBox">

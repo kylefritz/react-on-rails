@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   resources :photos, only: [:index]
   resources :products, only: [:index]
+  resources :comments, only: [:index, :create]
 end

@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+if Rails.env.development?
+  Comment.create!(author: "Kyle F.", text: "This is one comment")
+  Comment.create!(author: "Oren M.", text: "This is *another* comment")
+  Comment.create!(author: "JJ", text: "This is a *third* comment")
+end

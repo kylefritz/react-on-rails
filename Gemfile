@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+source 'https://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0.rc2'
@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'therubyracer', :platforms => :ruby
 gem 'sprockets-coffee-react'
+gem 'rails-assets-showdown'
+gem 'rails-assets-underscore'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
